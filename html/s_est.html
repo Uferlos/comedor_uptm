@@ -1,0 +1,52 @@
+<link rel="stylesheet" type="text/css" href="../css/typeahead.css">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalSearchEst" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSearchEst">Consulta de estudiantes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline" id="sEst" autocomplete="off">
+          <div class="form-group mb-2">
+            <label for="searchEst" class="sr-only">Busqueda</label>
+            <input type="text" readonly class="form-control-plaintext" id="searchEst" value="Carnet/Cedula">
+          </div>
+          <div class="form-group mx-sm-1 mb-2">
+            <label for="searchField" class="sr-only">Carnet/</label>
+            <input type="text" class="form-control ced" id="searchField" placeholder="Ingresar">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">
+            <span class="oi oi-magnifying-glass"></span>
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/typeahead.js"></script>
+
+<script type="text/javascript">
+  /*$.getJSON('../php/methods/load_carnet.php', function(data){
+    $('#searchField').typeahead({source:data});
+  })*/
+
+  $.getJSON('../php/methods/load_cedest.php', function(data){
+    $('#searchField').typeahead({source:data});
+  })
+
+  $('.modal').modal('show')
+  $('.modal').modal('handleUpdate')
+
+  $('#searchField').mask('A000000000',{
+    'translation':{
+      A:{pattern: /[VE,ve, 0-9*]/}
+    },
+  });
+
+</script>

@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" href="../css/typeahead.css">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalSearchDoc" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSearchDoc">Consulta de docentes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline" id="sDoc" autocomplete="off">
+          <div class="form-group mb-2">
+            <label for="searchDoc" class="sr-only">Busqueda</label>
+            <input type="text" readonly class="form-control-plaintext" id="searchDoc" value="Cedula">
+          </div>
+          <div class="form-group mx-sm-1 mb-2">
+            <label for="searchField" class="sr-only">Cedula</label>
+            <input type="text" class="form-control ced" id="searchField" placeholder="Ingresar">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">
+            <span class="oi oi-magnifying-glass"></span>
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/typeahead.js"></script>
+
+<script type="text/javascript">
+  $.getJSON('../php/methods/load_ced.php', function(data){
+    $('#searchField').typeahead({source:data});
+  })
+
+  $('.modal').modal('show')
+  $('.modal').modal('handleUpdate')
+
+  $('#searchField').mask('A-00.000.000',{
+        'translation':{
+          A:{pattern: /[VE,ve]/}
+        },
+        placeholder: 'V/E-00.000.000',
+        clearIfNotMatch: true
+      });
+</script>
